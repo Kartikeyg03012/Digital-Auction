@@ -1,0 +1,18 @@
+.navbar-brand{
+  font-size: 2rem !important;
+  color: #fff !important;
+  text-align: center;
+  margin-left: 3rem;
+  transition: color 0.2s;
+  font-family: "Ubuntu" !important;
+}
+
+.navbar-brand:hover{
+  color: #010101 !important;
+}
+
+.pro{
+  font-family: "Montserrat" !important;
+color: #010101 !important;
+  font-size: 1.5rem !important;
+}

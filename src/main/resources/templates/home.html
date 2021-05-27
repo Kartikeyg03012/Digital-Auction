@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org">
+
+<head>
+<!--Font Awsome  -->
+<script src='https://kit.fontawesome.com/a076d05399.js'
+	crossorigin='anonymous'></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" th:href="@{/img/fav.jpg}" />
+<!-- google fonts links -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Ubuntu&display=swap"
+	rel="stylesheet">
+
+<!--css style sheets  -->
+<link rel="stylesheet" th:href="@{css/style-new.css}">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<!-- favicon -->
+
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+<!-- icon -->
+<link rel="stylesheet" th:href="@{css/icon-font.css}">
+<!-- ion icons -->
+<script src=" https://unpkg.com/ionicons@5.2.3/dist/ionicons.js">
+  </script>
+
+<title>Home | Digital Auction</title>
+</head>
+
+<body th:object="${data}">
+	<section class="background-section" id="title">
+
+		<div class="container-fluid">
+
+			<!-- Nav Bar -->
+
+			<nav class="navbar navbar-expand-lg navbar-dark">
+
+				<a class="navbar-brand" href="">Digital Auction</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarTogglerDemo02">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="#on-cat">HOME</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="#on-cat">CATEGORIES</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="#on-how">HOW
+								IT WORKS</a></li>
+						<li class="nav-item"><a class="nav-link" href="#footer">CONTACT
+								US</a></li>
+					</ul>
+					<span th:text="'Hello, '+${data.name}" style="margin: 20px"></span>
+					<div th:if="${data.role=='ROLE_ADMIN'}" class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class='fas fa-user-edit' style='font-size: 20px'></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a style="text-decoration: none;">
+								<button class="dropdown-item" type="button"
+									th:text="${data.name}"></button>
+							</a>
+							<hr>
+							<a th:href="@{/admin/dashboard}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My
+									Dashboard</button>
+							</a> <a class="nav-link" th:href="@{/logout}"><button
+									class="btn btn-outline-danger">Logout</button></a>
+						</div>
+					</div>
+					<div th:if="${data.role=='ROLE_BUYER'}" class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class='fas fa-user-edit' style='font-size: 20px'></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a style="text-decoration: none;">
+								<button class="dropdown-item" type="button"
+									th:text="${data.name}"></button>
+
+							</a>
+							<hr>
+							<a th:href="@{/user/show-profile}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My Profile</button>
+							</a> <a th:href="@{/user/my-orders}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My Orders</button>
+							</a> <a th:href="@{/user/my-wishlist}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My Wishlist</button>
+							</a> <a th:href="@{/user/request-seller-page}"
+								style="text-decoration: none;">
+								<button class="dropdown-item" type="button">Become
+									Seller</button>
+							</a> <a th:href="@{/user/show-profile}"
+								style="text-decoration: none;">
+								<button class="dropdown-item" type="button">Change
+									Password</button>
+							</a> <a class="nav-link" th:href="@{/logout}"><button
+									class="btn btn-outline-danger">Logout</button></a>
+						</div>
+					</div>
+					<div th:if="${data.role=='ROLE_SELLER'}" class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class='fas fa-user-edit' style='font-size: 20px'></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a style="text-decoration: none;">
+								<button class="dropdown-item" type="button"
+									th:text="${data.name}"></button>
+
+							</a>
+							<hr>
+							<a th:href="@{/seller/show-profile}"
+								style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My Profile</button>
+							</a><a th:href="@{/seller/my-orders}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My Orders</button>
+							</a> <a th:href="@{/seller/my-wishlist}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My Wishlist</button>
+							</a> <a th:href="@{/seller/dashboard}" style="text-decoration: none;">
+								<button class="dropdown-item" type="button">My
+									Dashboard</button>
+							</a> <a th:href="@{'/seller/change-password/'+${data.id}}"
+								style="text-decoration: none;">
+								<button class="dropdown-item" type="button">Change
+									Password</button>
+							</a> <a class="nav-link" th:href="@{/logout}"><button
+									class="btn btn-outline-danger">Logout</button></a>
+						</div>
+					</div>
+
+
+				</div>
+			</nav>
+
+
+			<!-- Title -->
+
+			<div class="row">
+				<div class="col-lg-6">
+					<h1 class="big-heading">MAKE YOUR WINNING BID NOW.</h1>
+				</div>
+				<div class="col-lg-6">
+					<a href="#ongoing-auc" class="btn btn-light btn-lg viewall-button"
+						role="button">View All Auctions</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Features -->
+
+	<section class="white-section" id="features">
+
+		<div class="container-fluid">
+
+			<h2>Always choose the best &mdash; That's where we come in.</h2>
+			<p class="long-copy">Hello, welcome to Apni Dukan, your new
+				premium collectibles delivery service. Due to COVID we know you
+				cannot visit anywhere to buy the premium collections. We know you’re
+				always busy. So let us take care of that, we’re really good at it,
+				we promise!</p>
+			<div class="row">
+				<div class="feature-box col-lg-3">
+					<ion-icon name="infinite-outline" class="icon"></ion-icon>
+					<h3 class="feature-title">Collection</h3>
+					<p>We provide platform for all the collectibles from history
+						artifacts to sci-fi fan fictions.</p>
+				</div>
+
+				<div class="feature-box col-lg-3">
+					<ion-icon name="alarm-outline" class="icon"></ion-icon>
+					<h3 class="feature-title">Delievery</h3>
+					<p>Get it delivered right to your preferred location. We work
+						with the best service providers in each town to ensure that you
+						get it on time without damaging the property.</p>
+				</div>
+
+				<div class="feature-box col-lg-3">
+					<ion-icon name="checkmark-done-outline" class="icon"></ion-icon>
+					<h3 class="feature-title">Quality Check</h3>
+					<p>All the collectibles we provide are top-notch. They are
+						verified by the professionals before putting it on the website for
+						auction.</p>
+				</div>
+
+				<div class="feature-box col-lg-3">
+					<ion-icon name="cart-outline" class="icon"></ion-icon>
+					<h3 class="feature-title">Bid On Anything</h3>
+					<p>We have all the dogs, the greatest dogs.</p>
+				</div>
+
+			</div>
+
+
+		</div>
+	</section>
+
+
+	<!-- ongoing auctions -->
+	<section class="light-section">
+		<div class="container-fluid">
+			<h2 id="ongoing-auc">Ongoing Auctions</h2>
+			<div th:if="${session.msg}" th:classappend="${session.type}"
+				class="alert" role="alert">
+				<p th:text="${session.msg}"></p>
+				<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+			</div>
+			<div class="card-deck">
+				<div class="card" th:each="l:${list}">
+					<img th:src="@{'/img/'+${l.image_url}}" src="#"
+						class="card-img-top" alt="Not Avaliable">
+					<div class="card-body">
+						<a style="text-decoration: none" href="#"
+							th:href="@{'productDetailsById/'+${l.id}}" class="card-title">
+							<h5 class="ongoing" th:text="${l.name}"></h5>
+						</a>
+						<p class="card-text" th:text="${l.description}"></p>
+						Starting value:<span th:text="${l.amount}"></span> <br>Current
+						value:<span th:text="${l.bid_amount}"></span> <br>Bidders
+						count:
+					</div>
+					<div class="card-footer">
+						<form th:action="@{/add-bid}" method="post" class="form-inline">
+							<div class="form-row">
+								<div class="form-group col-md-9">
+									<input type="text" th:value="${data.email}" name="uid" hidden>
+									<input type="text" th:value="${l.id}" name="pid" hidden>
+
+									<input type="text" class="form-control" name="addBid"
+										required="required">
+								</div>
+								<div class="form-group col-md-2">
+									<input type="submit" class="btn btn-secondary"
+										value="Place BID">
+								</div>
+							</div>
+						</form>
+						<br> <span th:text="${l.totalLeftDays}+' Days Left'"></span>&nbsp;&nbsp;&nbsp;
+						<a th:if="${!data.wishListProduct.contains(l.id)}"
+							th:href="@{'add-to-wishlist/'+${l.id}}">
+							<button type="submit" class="btn btn-outline-primary"
+								value="Add to wishlist">
+								<i class="fa fa-heart-o" style="font-size: 22px;"></i>&nbsp;&nbsp;Add
+								to wishlist
+							</button>
+						</a> <a th:if="${data.wishListProduct.contains(l.id)}"
+							th:href="@{'user/remove-from-wishlist/'+${l.id}}">
+							<button type="submit" class="btn btn-outline-danger"
+								value="Add to wishlist">
+								<i class="fa fa-heart-o" style="font-size: 22px;"></i>&nbsp;&nbsp;Remove
+								From wishlist
+							</button>
+						</a>
+					</div>
+				</div>
+
+			</div>
+			<div>
+
+				<button onclick="toggleMore()" id="viewMoreButton"
+					class="btn btn-outline-light">View More</button>
+
+				<div id="viewMore" class="nonee">
+					<div class="card-deck">
+						<div class="card" th:each="l:${list2}">
+							<img th:src="@{'/img/'+${l.image_url}}" src="#"
+								class="card-img-top" alt="Not Avaliable">
+							<div class="card-body">
+								<a style="text-decoration: none" href="#"
+									th:href="@{'productDetailsById/'+${l.id}}" class="card-title">
+									<h5 class="ongoing" th:text="${l.name}"></h5>
+								</a>
+								<p class="card-text" th:text="${l.description}"></p>
+								Starting value:<span th:text="${l.amount}"></span> <br>Current
+								value:<span th:text="${l.bid_amount}"></span> <br>Bidders
+								count:
+							</div>
+							<div class="card-footer">
+								<form th:action="@{/add-bid}" method="post" class="form-inline">
+									<div class="form-row">
+										<div class="form-group col-md-9">
+											<input type="text" th:value="${data.email}" name="uid" hidden>
+											<input type="text" th:value="${l.id}" name="pid" hidden>
+											<input type="text" class="form-control" name="addBid"
+												required="required">
+										</div>
+										<div class="form-group col-md-2">
+											<input type="submit" class="btn btn-secondary"
+												value="Place BID">
+										</div>
+									</div>
+								</form>
+								<br> <span th:text="${l.totalLeftDays}+' Days Left'"></span>&nbsp;&nbsp;&nbsp;
+								<a th:if="${!data.wishListProduct.contains(l.id)}"
+									th:href="@{'add-to-wishlist/'+${l.id}}">
+									<button type="submit" class="btn btn-outline-primary"
+										value="Add to wishlist">
+										<i class="fa fa-heart-o" style="font-size: 22px;"></i>&nbsp;&nbsp;Add
+										to wishlist
+									</button>
+								</a> <a th:if="${data.wishListProduct.contains(l.id)}"
+									th:href="@{'user/remove-from-wishlist/'+${l.id}}">
+									<button type="submit" class="btn btn-outline-danger"
+										value="Add to wishlist">
+										<i class="fa fa-heart-o" style="font-size: 22px;"></i>&nbsp;&nbsp;Remove
+										From wishlist
+									</button>
+								</a>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="center">
+						<a th:href="@{/show-all-products/All}"><button
+								class="btn btn-outline-light">Show All</button></a>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+	</section>
+
+
+	<!-- categories -->
+	<section class="white-section">
+		<div class="container-fluid">
+			<h2 id="on-cat">Find your kick</h2>
+			<div class="card-deck">
+				<div class="card">
+					<img src="img/ant-furniture.jfif" class="card-img-top"
+						alt="furniture">
+					<div class="card-body">
+						<h5 class="card-title">Antique Furnitures</h5>
+						<p class="card-text">Any time you stumble across something
+							old, it’s worth looking into. Antiques are known for either being
+							worth a ton of money or being virtually worthless. The problem is
+							that it’s almost impossible to tell to the untrained eye. Antique
+							furniture is both functional and in most cases, very well made,
+							which makes it highly collectible. Even if you’re not a
+							collector, once you know what your antique furniture is worth,
+							you’ll see whether you want to store it or not.</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn  btn-secondary">EXPLORE</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="img/com.jpg" class="card-img-top" alt="comic-books">
+					<div class="card-body">
+						<h5 class="card-title">Comic Books</h5>
+						<p class="card-text">The thing with comic books is that even
+							the most minor defect can impact the value tremendously. Of all
+							the collectibles on this list, storing comic books well is
+							probably the most critical aspect of maintaining the collection’s
+							value. Sure, comic books might be for reading, but try to tell
+							that to an avid comic book collector. Main rule of thumb: sticky
+							hands off!</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn  btn-secondary">EXPLORE</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="img/coins.jfif" class="card-img-top" alt="coins">
+					<div class="card-body">
+						<h5 class="card-title">Coins and Currency</h5>
+						<p class="card-text">If you’ve ever read about the worth of
+							collectible coins and currency, you know how valuable specific
+							pieces can be. You may have been excited thinking that you might
+							have a rare penny in your piggy bank, only to spend hours
+							searching and then realizing you don’t have anything worth more
+							than face value. That’s the thing with this collectible item —
+							coming across the really expensive coins and currency out of the
+							blue is rare. So when you find and collect those unusual and rare
+							items, make sure you take good care of them.</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn  btn-secondary">EXPLORE</a>
+					</div>
+				</div>
+			</div>
+			<br> <br>
+			<div class="card-deck">
+				<div class="card">
+					<img src="img/cars.jpg" class="card-img-top" alt="cars">
+					<div class="card-body">
+						<h5 class="card-title">Classic Cars</h5>
+						<p class="card-text">It’s not often any one person has a
+							collection of classic cars, but many people have one classic car
+							that is at the top of all their possessions. An excellent vintage
+							car is well kept, well maintained, and well stored. This might
+							seem like a lot of work, but if you have a passion for cars, it
+							will become a welcomed past time.</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn  btn-secondary">EXPLORE</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="img/stamps.jfif" class="card-img-top" alt="stamps">
+					<div class="card-body">
+						<h5 class="card-title">Stamps</h5>
+						<p class="card-text">Collecting stamps seems like an old
+							pastime, but there are still many stamp collectors out there. In
+							fact, there may be more stamp collectors in the world than any
+							other collector on this list. The hobby combines a love of art
+							with a love of history. By collecting different stamps from
+							various places, you can learn an infinite amount about the
+							country of origin and the social and political atmosphere at the
+							time the stamp was created.</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn  btn-secondary">EXPLORE</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="img/art.jfif" class="card-img-top" alt="art">
+					<div class="card-body">
+						<h5 class="card-title">Fine Art and Jewelry</h5>
+						<p class="card-text">Fine art and jewelry are lumped together
+							because they are both highly personal collectibles. People who
+							collect one or the other tend to collect items they like instead
+							of which piece is worth the most money. Sure, an art or jewelry
+							collector will seek out rare pieces, but usually only if that
+							item they seek is aligned with their unique aesthetic. Passing
+							down fine art and jewelry to the next generation is a highly
+							sentimental thing because each collection speaks to the person
+							who collected it in a way that some of these other collectibles
+							can’t.</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn  btn-secondary">EXPLORE</a>
+					</div>
+				</div>
+			</div>
+	</section>
+
+
+	<!-- how it works -->
+
+	<section class="colored-section" id="how-it-works">
+
+		<div class="container-fluid">
+			<h2 id="on-how">How it works?</h2>
+			<p>Easy-peasy!</p>
+			<div class="row">
+				<div class="feature-box col-lg-4">
+					<ion-icon name="search-outline" class="icon2"></ion-icon>
+					<h3 class="feature-title">Find Your Category</h3>
+					<p>Search, track and research your category.</p>
+				</div>
+
+				<div class="feature-box col-lg-4">
+					<ion-icon name="megaphone-outline" class="icon2"></ion-icon>
+					<h3 class="feature-title">Start Bidding</h3>
+					<p>Bid at live and online auctions.</p>
+				</div>
+
+				<div class="feature-box col-lg-4">
+					<ion-icon name="trophy-outline" class="icon2"></ion-icon>
+					<h3 class="feature-title">Win the Auction</h3>
+					<p>We're here to support you post-auction.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Testimonials -->
+
+	<section class="white-section" id="testimonials">
+		<h2 id="test-head">Our customers can't live without us</h2>
+		<div id="testimonial-carousel" class="carousel slide"
+			data-ride="false">
+			<div class="carousel-inner">
+				<div class="carousel-item active container-fluid">
+					<h2 class="testimonial-text test-size">I was looking for a
+						online service which is easy to use and provide variety of
+						collections with full credibility as I'm a maniac for old
+						artifacts. I tried a lot of them and ended up with Apni Dukan.
+						Best service providers in the auction area. Keep up the great
+						work!</h2>
+					<img class="testimonial-image test-image" src="img/customer-2.jpg"
+						alt="customer-2"> <em>Joana Silva, Washington</em>
+
+				</div>
+				<div class="carousel-item container-fluid">
+					<h2 class="testimonial-text test-size">I am a proud collector
+						of several beautiful paintings by famous artists — and I owe it to
+						Apni Dukan. I look forward to following more auctions for better
+						deals.”</h2>
+					<br> <img class="testimonial-image test-image"
+						src="img/customer-1.jpg" alt="customer-1"> <em>Alberto
+						Duncan, Spain</em>
+				</div>
+
+				<div class="carousel-item container-fluid">
+					<h2 class="testimonial-text test-size">I am a frequent bidder
+						in Apni Dukan and I can say for sure that I never had a single
+						problem since I started bidding here. They provide great support
+						for their customers.”</h2>
+					<br> <img class="testimonial-image test-image"
+						src="img/customer-3.jpg" alt="customer-3"> <em>Dev
+						Oberoi, India</em>
+				</div>
+
+			</div>
+			<a class="carousel-control-prev" href="#testimonial-carousel"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon"></span>
+			</a> <a class="carousel-control-next" href="#testimonial-carousel"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon"></span>
+			</a>
+		</div>
+
+	</section>
+
+
+	<!-- newsletter -->
+	<section class="white-section" id="footer">
+		<div class="container-fluid">
+
+			<h2 class="on-news">We're happy to hear from you</h2>
+			<div class="row"></div>
+			<div class="row space-in-bet">
+				<form method="POST" th:action="@{/contact-us}" class="contact-form">
+					<div class="row">
+						<div class="col span-1-of-3">
+							<label for="name">Name</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="name" id="name" placeholder="Your name"
+								required>
+						</div>
+					</div>
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label for="email">Email</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="email" name="email" id="email"
+								placeholder="Your email" required>
+						</div>
+					</div>
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label for="number">Number</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="number" id="number"
+								placeholder="Your Contact Number" required>
+						</div>
+					</div>
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label for="subject">Subject</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="subject" id="subject"
+								placeholder="Type Subject" required>
+						</div>
+					</div>
+
+
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label>Drop us a line</label>
+						</div>
+						<div class="col span-2-of-3">
+							<textarea name="message" placeholder="Your message" required></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<input type="submit" value="Send it!" class="btn btn-success bot">
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+
+	<footer class="light-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col span-1-of-2">
+					<ul class="footer-nav">
+						<li><a href="aboutus.html">About us</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="tnc.html">Terms&Conditions</a></li>
+						<li><a href="faqs.html">FAQs</a></li>
+					</ul>
+				</div>
+
+				<div class="col span-1-of-2">
+					<ul class="social-links">
+						<li><a href="#"> <ion-icon name="logo-linkedin"
+									class="ion-social-facebook"></ion-icon>
+						</a></li>
+						<li><a href="#"> <ion-icon name="logo-github"
+									class="ion-social-twitter"></ion-icon>
+						</a></li>
+						<li><a href="#"> <ion-icon name="logo-instagram"
+									class="ion-social-instagram"></ion-icon>
+						</a></li>
+						<li><a href="#"> <ion-icon name="logo-google"
+									class="ion-social-googleplus"></ion-icon>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<p>© Copyright 2021 Digital Auction</p>
+		</div>
+	</footer>
+
+
+
+
+	<!-- scrolling button - login -->
+	<button th:if="${data=='null'}"
+		onclick="window.location.href='/Digital-Auction/user/dashboard'"
+		id="myBtn" title="LOGIN">
+		L<br> O <br> G <br> I <br> N
+	</button>
+
+	<!-- js source -->
+	<script src="js/myBtn.js" charset="utf-8"></script>
+</body>
+
+</html>

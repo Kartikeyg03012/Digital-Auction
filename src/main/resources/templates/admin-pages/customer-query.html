@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/admin-pages/adminbase::layout(~{::section})">
+<head>
+<link rel="icon" th:href="@{/img/fav.jpg}" />
+<meta charset="UTF-8" />
+<title>User Profile | Digital Auction</title>
+</head>
+<body>
+	<section>
+		<h3 class="text-center">All Queries</h3>
+
+		<div style="margin-left: 30px">
+			SORT BY: <a th:href="@{'/admin/sorting-query/all/0'}"><button
+					class="btn btn-outline-primary">ALL</button></a> <a
+				th:href="@{'/admin/sorting-query/Complete/0'}"><button
+					class="btn btn-outline-primary">Complete</button></a> <a
+				th:href="@{'/admin/sorting-query/Un Resolve/0'}"><button
+					class="btn btn-outline-primary">Un Resolve</button></a> <a
+				th:href="@{/admin/sorting-query/Process/0}"><button
+					class="btn btn-outline-primary">Process</button></a>
+		</div>
+		<div th:if="${session.msg}" th:classappend="${session.type}"
+			class="alert" role="alert">
+			<p th:text="${session.msg}"></p>
+			<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+		</div>
+		<div style="margin: 10px" class="table-responsive">
+			<table class="table table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">UID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Number</th>
+						<th scope="col">Subject</th>
+						<th scope="col">Query</th>
+						<th scope="col">Current Status</th>
+						<th scope="col">Created Date</th>
+						<th scope="col">Last Update Date</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						th:classappend="${l.status=='Complete'}?'table-success':'table-danger'"
+						class="" th:each="l:${list}">
+						<th th:text="${'DAQ'+l.id}"></th>
+
+						<td><a th:text="${l.name}"></a></td>
+
+
+						<td th:text="${l.email}"></td>
+
+						<td th:text="${l.number}"></td>
+						<th th:text="${l.subject}"></th>
+						<td th:text="${l.message}"></td>
+						<td th:text="${l.status}"></td>
+						<td th:text="${l.create_date}"></td>
+						<td th:text="${l.update_date}"></td>
+						<td><div>
+								<a th:href="@{'/admin/update-query/solve/'+${l.id}}"><button
+										onclick="confirm('Are You Sure Want To Continue.. ')">
+										<i class='fas fa-check' style='font-size: 24px'></i>
+									</button> </a> <a th:href="@{'/admin/update-query/unsolve/'+${l.id}}"><button
+										onclick="confirm('Are You Sure Want To Continue.. ')">
+										<i class='fas fa-times'
+											style='font-size: 24px; color: red;'></i>
+									</button></a> <br>
+							</div></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<br> <br>
+		<!-- This is Pagination -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li th:classappend="${currentpage!=0}?'':'disabled'"
+					class="page-item"><a th:href="@{${currentpage-1}}"
+					class="page-link" href="#" tabindex="-1">Previous</a></li>
+
+				<li th:classappend="${currentpage==i-1?'active':''}"
+					th:each="i : ${#numbers.sequence(1,totalpages)}" class="page-item"><a
+					th:href="@{${i-1}}" class="page-link" href="#"><span
+						th:text="${i}"></span></a></li>
+
+
+				<li th:classappend="${currentpage+1 !=totalpages}?'':'disabled'"
+					class="page-item"><a th:href="@{${currentpage+1}}"
+					class="page-link" href="#">Next</a></li>
+			</ul>
+		</nav>
+		<script src='https://kit.fontawesome.com/a076d05399.js'
+			crossorigin='anonymous'></script>
+	</section>
+
+</body>
+</html>

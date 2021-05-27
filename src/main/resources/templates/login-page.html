@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org">
+
+<head>
+<title>Log In | Digital Auction</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/style_form.css">
+<link rel="icon" th:href="@{/img/fav.jpg}" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Syne+Mono&display=swap"
+	rel="stylesheet">
+
+</head>
+<body>
+
+	<a th:href="@{/}">
+		<button class="btn2">Home</button>
+	</a>
+
+	<div class="loginbox2">
+
+		<ion-icon name="person-circle-outline" class="avatar"></ion-icon>
+		<h1 class="logoo">LogIn Here</h1>
+		<br>
+		<div th:if="${session.msg}" th:classappend="${session.type}"
+			class="alert" role="alert">
+			<p th:text="${session.msg}"></p>
+			<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+		</div>
+		<div th:if="${param.error}" class="alert alert-danger">Invalid
+			Username And Password, Please Try Again !!!</div>
+		<div th:if="${param.logout}" class="alert alert-danger">You Have
+			Been Logged Out</div>
+		<br>
+
+		<form th:action="@{/do-login}" action="#" method="POST">
+			<p>Username</p>
+			<input type="text" name="username" placeholder="Enter Username" required>
+			<p>Password</p>
+			<input type="password" name="password" placeholder="Enter Password" required>
+			<input type="submit" value="Log In" class="btn2"> <a
+				th:href="@{'/forgot'}" href="#">Lost your password?</a><br> <a
+				th:href="@{'/sign-up'}">Don't have an account?</a>
+		</form>
+
+		<form>
+			<script src="https://checkout.razorpay.com/v1/payment-button.js"
+				data-payment_button_id="pl_GzGtENMRC2jgVj" async> </script>
+		</form>
+
+	</div>
+	<script src=" https://unpkg.com/ionicons@5.2.3/dist/ionicons.js">
+  </script>
+</body>
+</head>
+
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/user-pages/userbase::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>User Profile</title>
+</head>
+<body>
+	<section th:object="${data}">
+		<h3 class="text-center">Request For Seller</h3>
+		<div th:if="${session.msg}" th:classappend="${session.type}"
+			class="alert" role="alert">
+			<p th:text="${session.msg}"></p>
+			<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+		</div>
+		<form th:action="@{/user/process-request}" method="POST"
+			th:object="${data}">
+			<div th:if="${session.msg}" th:classappend="${session.type}"
+				class="alert" role="alert">
+				<p th:text="${session.msg}"></p>
+				<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="inputEmail4">Full Name</label> <input type="text"
+						class="form-control" id="inputEmail4"
+						placeholder="Your Name (As per your bank passbook)"
+						name="name_on_account" required>
+				</div>
+
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputAddress">Bank Full Name</label> <input type="text"
+						class="form-control" id="inputAddress" name="bank_name"
+						placeholder="Your Bank Name" required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputCity">IFSC CODE</label> <input type="text"
+						class="form-control" id="inputCity" placeholder="Your Bank IFSC CODE"
+						name="ifsc_code" required>
+
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="inputState">Bank Account Number</label> <input
+						type="text" class="form-control" name="account_no" id="inputState"
+						placeholder="Enter Your Bank Account Number (Please Recheck it Befor Submission)"
+						required>
+
+				</div>
+
+			</div>
+			<button type="submit" class="btn btn-success">Submit Details</button>
+			<br> <br>
+		</form>
+	</section>
+</body>
+</html>

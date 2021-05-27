@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/seller-pages/sellerbase::layout(~{::section})">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+
+<!-- Website CSS style -->
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+<!-- Website Font style -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Passion+One'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oxygen'
+	rel='stylesheet' type='text/css'>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<title>Add Product</title>
+
+<style type="text/css">
+/*
+/* Created by Filipe Pina
+ * Specific styles of signin, register, component
+ */
+/*
+ * General styles
+ */
+body, html {
+	height: 100%;
+	background-repeat: no-repeat;
+	background-color: #d3d3d3;
+	font-family: 'Oxygen', sans-serif;
+}
+
+.main {
+	margin-top: 70px;
+}
+
+h1.title {
+	font-size: 50px;
+	font-family: 'Passion One', cursive;
+	font-weight: 400;
+}
+
+hr {
+	width: 10%;
+	color: #fff;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+label {
+	margin-bottom: 15px;
+}
+
+input, input::-webkit-input-placeholder {
+	font-size: 11px;
+	padding-top: 3px;
+}
+
+.main-login {
+	background-color: #fff;
+	/* shadows and rounded borders */
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.main-center {
+	margin-top: 30px;
+	margin: 0 auto;
+	max-width: 330px;
+	padding: 40px 40px;
+}
+
+.login-button {
+	margin-top: 5px;
+}
+
+.login-register {
+	font-size: 11px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row main">
+				<div class="panel-heading">
+					<div class="panel-title text-center">
+						<h1 class="title">Add Product Here</h1>
+						<hr />
+						<div th:if="${session.msg}" th:classappend="${session.type}"
+							class="alert" role="alert">
+							<p th:text="${session.msg}"></p>
+							<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+						</div>
+					</div>
+				</div>
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="POST"
+						th:action="@{/seller/add-products}" enctype="multipart/form-data">
+
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Product
+								Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" name="name" id="name"
+										placeholder="Enter Product Name" required />
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+						<div class="form-group">
+							<label for="test">Descripction</label>
+
+							<div class="input-group">
+								<textarea id="test" name="description" class="form-control"
+									placeholder="Product Descripction" required></textarea>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label for="Specifications">Specifications</label>
+
+							<div class="input-group">
+								<textarea id="Specifications" rows="5" cols="10"
+									name="specifications" class="form-control"
+									placeholder="Product Specifications" required></textarea>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Amount</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"></span> <input type="number"
+										class="form-control" name="amount" id="username"
+										placeholder="Product Amount" required />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputState"> Choose Category</label> <select
+								id="inputState" class="form-control" name="category"
+								required="required">
+								<option value="ANTIQUE_ITEMS">ANTIQUE ITEMS</option>
+								<option value="COINS_AND_CURRENCY">COINS AND CURRENCY</option>
+								<option value="COMIC_BOOKS">COMIC BOOKS</option>
+								<option value="COLLECTABLES_ITEMS">COLLECTABLES ITEMS</option>
+								<option value="DESIGNER_CLOTHING_&_ACCESSORIES">DESIGNER
+									CLOTHING& ACCESSORIES</option>
+								<option value="FINE_ART_AND_CRAFT">FINE ART AND CRAFT</option>
+								<option value="HOME_ACCESSORIES">HOME ACCESSORIES</option>
+								<option value="LUXURY_VEHICLES">LUXURY VEHICLES</option>
+								<option value="MUSICAL_INSTRUMENTS">MUSICAL INSTRUMENTS</option>
+								<option value="OTHER">OTHER...</option>
+
+
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="id_dateOfBirth" class="cols-sm-2 control-label">Max
+								Time To Sell</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"></span> <input type="date"
+										class="form-control" name="maxDateOfProduct"
+										id="id_dateOfBirth" onclick="checkDOB()"
+										placeholder="Set The Max Date For Your Product" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="maxAmountOfProduct" class="cols-sm-2 control-label">Max
+								Product Amount</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" name="maxAmountOfProduct"
+										id="maxAmountOfProduct"
+										placeholder="Set The Max Amount For Your Product" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="choosefile" class="cols-sm-2 control-label">Add
+								images</label> <input type="file" class="form-control" name="image"
+								placeholder="Choose Your Files" required>
+
+						</div>
+
+
+
+						<span>*It May Be Take Some Time To Show Your Product Live</span>
+						<div class="form-group ">
+							<button type="submit"
+								class="btn btn-success btn-lg btn-block login-button">Add
+								Product</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script
+			src="https://cdn.tiny.cloud/1/66kcyoo38svbjn6bvemg8yvwqdsotosvzmwqure1xwadnbd9/tinymce/5/tinymce.min.js"
+			referrerpolicy="origin"></script>
+		<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+		
+</script>
+
+
+		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+	</section>
+</body>
+</html>
