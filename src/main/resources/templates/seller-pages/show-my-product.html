@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/seller-pages/sellerbase::layout(~{::section})">
+<head>
+<link rel="icon" th:href="@{/img/fav.jpg}" />
+<meta charset="UTF-8" />
+<title>show-my-product</title>
+</head>
+<body>
+	<section>
+
+		<h3 class="text-center">My All Products</h3>
+
+		<br>
+		<div th:if="${session.msg}" th:classappend="${session.type}"
+			class="alert" role="alert">
+			<p th:text="${session.msg}"></p>
+			<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+		</div>
+		<div style="margin: 10px" class="table-responsive">
+			<table class="table table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">PID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Category</th>
+						<th scope="col">Amount</th>
+						<th scope="col">Highest Bid</th>
+						<th scope="col">Description</th>
+						<th scope="col">Status</th>
+						<th scope="col">Day's Left</th>
+						<th scope="col">Verified</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="l:${list}">
+						<th th:text="${'DASPIFS'+l.id}"></th>
+						<td><a href="#"
+							th:href="@{'/seller/productDetailsById/'+${l.id}}"
+							th:text="${l.name}"></a></td>
+
+
+						<td th:text="${l.category}"></td>
+
+						<td th:text="${l.amount}"></td>
+						<th th:text="${l.bid_amount}"></th>
+						<td th:text="${l.description}"></td>
+						<td th:text="${l.status}"></td>
+						<td th:text="${l.totalLeftDays>=0}?${l.totalLeftDays}:'0'"></td>
+						<td th:text="${l.verified}"></td>
+						<td><a th:href="@{'/seller/delete-product/'+${l.id}}">
+								<button class="btn btn-outline-danger btn-sm"
+									onclick="alert('Are You Sure Want To Delete This Product')">Delete</button>
+						</a> <br>
+							<form th:if="${l.status=='Pending'}"
+								th:action="@{'/seller/update-product/'+${l.id}}" method="POST">
+								<button class="btn btn-outline-success btn-sm">Update</button>
+							</form></td>
+
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<br> <br>
+		<!-- This is Pagination -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li th:classappend="${currentpage!=0}?'':'disabled'"
+					class="page-item"><a th:href="@{${currentpage-1}}"
+					class="page-link" href="#" tabindex="-1">Previous</a></li>
+
+				<li th:classappend="${currentpage==i-1?'active':''}"
+					th:each="i : ${#numbers.sequence(1,totalpages)}" class="page-item"><a
+					th:href="@{${i-1}}" class="page-link" href="#"><span
+						th:text="${i}"></span></a></li>
+
+
+				<li th:classappend="${currentpage+1 !=totalpages}?'':'disabled'"
+					class="page-item"><a th:href="@{${currentpage+1}}"
+					class="page-link" href="#">Next</a></li>
+			</ul>
+		</nav>
+	</section>
+
+</body>
+</html>

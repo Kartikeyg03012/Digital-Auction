@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/user-pages/userbase::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>User DashBoard</title>
+</head>
+<body>
+	<section th:object="${data}">
+		<div class="container">
+			<div class="jumbotron">
+				<h2
+					th:text=" 'Welcome '+ ${data.name}+' To Digital Auction - User Panel'"></h2>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

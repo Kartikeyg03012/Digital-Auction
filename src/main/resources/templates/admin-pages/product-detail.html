@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/admin-pages/adminbase::layout(~{::section})">
+<head>
+<link rel="icon" th:href="@{/img/fav.jpg}" />
+<meta charset="UTF-8" />
+<title>show-my-product</title>
+</head>
+<body>
+	<section>
+
+		<h2 class="text-center">
+			All Products<span th:if="${id>0}" th:text="' Of Id: '+${id}"></span>
+		</h2>
+
+		<div th:if="${session.msg}" th:classappend="${session.type}"
+			class="alert" role="alert">
+			<p th:text="${session.msg}"></p>
+			<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+		</div>
+
+
+		<div style="margin-left: 30px">
+			SORT BY: <a th:href="@{'/admin/sorting-product/all/0'}"><button
+					class="btn btn-outline-primary">ALL</button></a> <a
+				th:href="@{'/admin/sorting-product/complete/0'}"><button
+					class="btn btn-outline-primary">Complete</button></a> <a
+				th:href="@{'/admin/sorting-product/pending/0'}"><button
+					class="btn btn-outline-primary">Pending</button></a> <a
+				th:href="@{'/admin/sorting-product/Processing/0'}"><button
+					class="btn btn-outline-primary">In Process</button></a> <a
+				th:href="@{/admin/sorting-product/verified/0}"><button
+					class="btn btn-outline-primary">Verified</button></a><a
+				th:href="@{/admin/sorting-product/notverified/0}"><button
+					class="btn btn-outline-primary">Not Verified</button></a> <a
+				th:href="@{'/admin/sorting-product/archive/0'}"><button
+					class="btn btn-outline-primary">Archive</button></a><a
+				th:href="@{'/admin/sorting-product/unarchive/0'}"><button
+					class="btn btn-outline-primary">Un Archive</button></a>
+		</div>
+		<div style="margin: 10px" class="table-responsive">
+			<table class="table table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">PID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Category</th>
+						<th scope="col">Amount</th>
+						<th scope="col">Done On</th>
+						<th scope="col">Description</th>
+						<th scope="col">Status</th>
+						<th scope="col">Verified</th>
+						<th scope="col">Archive</th>
+						<th scope="col">Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-success" th:each="l:${list}">
+						<th th:text="${'DASPIFS'+l.id}"></th>
+
+						<td><a href="#"
+							th:href="@{'/admin/productDetailsById/'+${l.id}}"
+							th:text="${l.name}"></a></td>
+
+
+						<td th:text="${l.category}"></td>
+
+						<td th:text="${l.amount}"></td>
+						<th th:text="${l.doneAt}"></th>
+						<td th:text="${l.description}"></td>
+						<td th:text="${l.status}"></td>
+						<td th:text="${l.verified}"></td>
+						<td th:text="${l.archive}"></td>
+						<td><div>
+								<a th:href="@{'/admin/product-done/'+${l.id}}"><button
+										onclick="confirm('Are You Sure Want To Continue.. ')">
+										<i class='fas fa-power-off' style='font-size: 24px;color:blue'></i>
+									</button> </a> <a th:href="@{'/admin/product-visible/'+${l.id}}"><button
+										onclick="confirm('Are You Sure Want To Continue.. ')">
+										<i class='fas fa-check-circle' style='font-size: 24px'></i>
+									</button> </a> <a th:href="@{'/admin/archive-product/'+${l.id}}"><button
+										onclick="confirm('Are You Sure Want To Continue.. ')">
+										<i class='fas fa-eye-slash'
+											style='font-size: 24px; color: red;'></i>
+									</button></a> <br>
+							</div></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<br> <br>
+		<!-- This is Pagination -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li th:classappend="${currentpage!=0}?'':'disabled'"
+					class="page-item"><a th:href="@{${currentpage-1}}"
+					class="page-link" href="#" tabindex="-1">Previous</a></li>
+
+				<li th:classappend="${currentpage==i-1?'active':''}"
+					th:each="i : ${#numbers.sequence(1,totalpages)}" class="page-item"><a
+					th:href="@{${i-1}}" class="page-link" href="#"><span
+						th:text="${i}"></span></a></li>
+
+
+				<li th:classappend="${currentpage+1 !=totalpages}?'':'disabled'"
+					class="page-item"><a th:href="@{${currentpage+1}}"
+					class="page-link" href="#">Next</a></li>
+			</ul>
+		</nav>
+		<script src='https://kit.fontawesome.com/a076d05399.js'
+			crossorigin='anonymous'></script>
+	</section>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+#This Link For Live Mode Payment Page-->
+
+https://rzp.io/l/verify-seller
+  
+  
+ #This Code is For Live Mode Payment Button For Page -->  
+ 
+ <div class="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_GzI32fezSiTpA8/view" data-text="Pay Now" data-color="#221C5A" data-size="large">
+  <script>
+    (function(){
+      var d=document; var x=!d.getElementById('razorpay-embed-btn-js')
+      if(x){ var s=d.createElement('script'); s.defer=!0;s.id='razorpay-embed-btn-js';
+      s.src='https://cdn.razorpay.com/static/embed_btn/bundle.js';d.body.appendChild(s);} else{var rzp=window['__rzp__'];
+      rzp && rzp.init && rzp.init()}})();
+  </script>
+</div>
+    

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org">
+
+<head>
+<!--Font Awsome  -->
+<script src='https://kit.fontawesome.com/a076d05399.js'
+	crossorigin='anonymous'></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" th:href="@{/img/fav.jpg}" />
+<!-- google fonts links -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Ubuntu&display=swap"
+	rel="stylesheet">
+
+<!--css style sheets  -->
+<link rel="stylesheet" th:href="@{/css/style-new.css}">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<!-- favicon -->
+
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+<!-- icon -->
+<link rel="stylesheet" th:href="@{/css/icon-font.css}">
+<!-- ion icons -->
+<script src=" https://unpkg.com/ionicons@5.2.3/dist/ionicons.js">
+  </script>
+
+<title>All Products | Digital Auction</title>
+</head>
+
+<body th:object="${data}">
+	<!-- ongoing auctions -->
+	<section class="light-section">
+		<div class="container-fluid">
+
+			<h2 id="ongoing-auc">All Products</h2>
+			<div id="ongoing-auc" style="margin-left: 30px">
+				SORT BY: <a th:href="@{'/show-all-products/all'}"><button
+						class="btn btn-primary">ALL</button></a> <a
+					th:href="@{'/show-all-products/newest'}"><button
+						class="btn btn-primary">Newest</button></a> <a
+					th:href="@{'/show-all-products/oldest'}"><button
+						class="btn btn-primary">Oldest</button></a> <br> <br>
+				<form th:action="@{/show-all-products/}">
+					<div class="row">
+						<div class="col">
+							<label for="inputState"></label> <select id="inputState"
+								class="form-control" name="category" required="required">
+								<option value="null" selected="selected">Sort By
+									Category</option>
+								<option value="ANTIQUE_ITEMS">ANTIQUE ITEMS</option>
+								<option value="COINS_AND_CURRENCY">COINS AND CURRENCY</option>
+								<option value="COMIC_BOOKS">COMIC BOOKS</option>
+								<option value="COLLECTABLES_ITEMS">COLLECTABLES ITEMS</option>
+								<option value="DESIGNER_CLOTHING_&_ACCESSORIES">DESIGNER
+									CLOTHING& ACCESSORIES</option>
+								<option value="FINE_ART_AND_CRAFT">FINE ART AND CRAFT</option>
+								<option value="HOME_ACCESSORIES">HOME ACCESSORIES</option>
+								<option value="LUXURY_VEHICLES">LUXURY VEHICLES</option>
+								<option value="MUSICAL_INSTRUMENTS">MUSICAL INSTRUMENTS</option>
+								<option value="OTHER">OTHER...</option>
+
+
+							</select>
+							<br>
+							<button class="btn btn-primary" type="submit">Sort</button>
+						</div>
+
+
+
+					</div>
+				</form>
+			</div>
+			<div th:if="${session.msg}" th:classappend="${session.type}"
+				class="alert" role="alert">
+				<p th:text="${session.msg}"></p>
+				<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+			</div>
+
+			<div>
+				<div class="row">
+					<div class="col-4" th:each="l:${list}">
+						<div class="card-deck">
+							<div class="card">
+								<img th:src="@{'/img/'+${l.image_url}}" src="#"
+									class="card-img-top" alt="Not Avaliable">
+								<div class="card-body">
+									<a style="text-decoration: none" href="#"
+										th:href="@{'/productDetailsById/'+${l.id}}" class="card-title">
+										<h5 class="ongoing" th:text="${l.name}"></h5>
+									</a>
+									<p class="card-text" th:text="${l.description}"></p>
+									Starting value:<span th:text="${l.amount}"></span> <br>Current
+									value:<span th:text="${l.bid_amount}"></span> <br>Bidders
+									count:
+								</div>
+								<div class="card-footer">
+									<form th:action="@{/add-bid}" method="post" class="form-inline">
+										<div class="form-row">
+											<div class="form-group col-md-9">
+												<input type="text" th:value="${data.email}" name="uid"
+													hidden> <input type="text" th:value="${l.id}"
+													name="pid" hidden> <input type="text"
+													class="form-control" name="addBid" required="required">
+											</div>
+											<div class="form-group col-md-2">
+												<input type="submit" class="btn btn-secondary"
+													value="Place BID">
+											</div>
+										</div>
+									</form>
+									<br> <span th:text="${l.totalLeftDays}+' Days Left'"></span>&nbsp;&nbsp;&nbsp;
+									<a th:if="${!data.wishListProduct.contains(l.id)}"
+										th:href="@{'/add-to-wishlist/'+${l.id}}">
+										<button type="submit" class="btn   	" value="Add to wishlist">
+											<i class="fa fa-heart-o" style="font-size: 22px;"></i>&nbsp;&nbsp;Add
+											to wishlist
+										</button>
+									</a> <a th:if="${data.wishListProduct.contains(l.id)}"
+										th:href="@{'/user/remove-from-wishlist/'+${l.id}}">
+										<button type="submit" class="btn btn-outline-danger"
+											value="Add to wishlist">
+											<i class="fa fa-heart-o" style="font-size: 22px;"></i>&nbsp;&nbsp;Remove
+											From wishlist
+										</button>
+									</a>
+								</div>
+								<br> <br>
+							</div>
+							<br> <br>
+						</div>
+						<br> <br>
+					</div>
+					<br> <br>
+				</div>
+				<br> <br>
+			</div>
+		</div>
+	</section>
+
+
+
+
+	<!-- newsletter -->
+	<section class="white-section" id="footer">
+		<div class="container-fluid">
+
+			<h2 class="on-news">We're happy to hear from you</h2>
+			<div class="row"></div>
+			<div class="row space-in-bet">
+				<form method="POST" th:action="@{/contact-us}" class="contact-form">
+					<div class="row">
+						<div class="col span-1-of-3">
+							<label for="name">Name</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="name" id="name" placeholder="Your name"
+								required>
+						</div>
+					</div>
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label for="email">Email</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="email" name="email" id="email"
+								placeholder="Your email" required>
+						</div>
+					</div>
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label for="number">Number</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="number" id="number"
+								placeholder="Your Contact Number" required>
+						</div>
+					</div>
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label for="subject">Subject</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="subject" id="subject"
+								placeholder="Type Subject" required>
+						</div>
+					</div>
+
+
+					<div class="row space-in-bet">
+						<div class="col span-1-of-3">
+							<label>Drop us a line</label>
+						</div>
+						<div class="col span-2-of-3">
+							<textarea name="message" placeholder="Your message" required></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<input type="submit" value="Send it!" class="btn btn-success bot">
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+
+	<footer class="light-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col span-1-of-2">
+					<ul class="footer-nav">
+						<li><a href="aboutus.html">About us</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="tnc.html">Terms&Conditions</a></li>
+						<li><a href="faqs.html">FAQs</a></li>
+					</ul>
+				</div>
+
+				<div class="col span-1-of-2">
+					<ul class="social-links">
+						<li><a href="#"> <ion-icon name="logo-linkedin"
+									class="ion-social-facebook"></ion-icon>
+						</a></li>
+						<li><a href="#"> <ion-icon name="logo-github"
+									class="ion-social-twitter"></ion-icon>
+						</a></li>
+						<li><a href="#"> <ion-icon name="logo-instagram"
+									class="ion-social-instagram"></ion-icon>
+						</a></li>
+						<li><a href="#"> <ion-icon name="logo-google"
+									class="ion-social-googleplus"></ion-icon>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<p>© Copyright 2021 Digital Auction</p>
+		</div>
+	</footer>
+
+
+
+
+	<!-- scrolling button - login -->
+	<button th:if="${data=='null'}"
+		onclick="window.location.href='/Digital-Auction/user/dashboard'"
+		id="myBtn" title="LOGIN">
+		L<br> O <br> G <br> I <br> N
+	</button>
+
+	<!-- js source -->
+	<script src="/js/myBtn.js" charset="utf-8"></script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/admin-pages/adminbase::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section th:object="${data}">
+		<div class="container">
+			<div class="jumbotron">
+				<h2
+					th:text=" 'Welcome '+ ${data.name}+' To Digital Auction - Admin Panel'"></h2>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

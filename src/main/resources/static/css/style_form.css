@@ -1,0 +1,127 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #221c5a;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+}
+
+
+.loginbox{
+    width: 320px;
+    height: 420px;
+    top: 40%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.loginbox2{
+    width: 320px;
+    height: 420px;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 80px 30px;
+    /* margin-top: 100px; */
+}
+
+.check{
+margin-top: -17px;
+float: right;
+position: relative;
+display: block;
+}
+
+.logoo{
+  margin-top: -15px;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.loginbox p,
+.loginbox2 p {
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+}
+
+
+.loginbox input,
+.loginbox2 input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.loginbox input[type="text"], input[type="password"], button,
+.loginbox2 input[type="text"], input[type="password"], button
+{
+    border: none;
+    border-bottom: 1px solid #221c5a;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+/* -----------btn--------- */
+
+.btn2
+{
+    border: 1px solid #fff;
+    outline: none;
+    height: 40px;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    background-color: inherit;
+}
+.btn2:hover
+{
+  border: 1px solid #221c5a;
+    cursor: pointer;
+    background-color: #fff;
+    color: #221c5a;
+    transition: 0.2s color border;
+}
+
+/* links */
+.loginbox a,
+.loginbox2 a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color:  #888;
+}
+
+.loginbox a:hover,
+.loginbox2 a:hover
+{
+    color:  #fff;
+}
+
+.col{
+  margin-top: -3%;
+}

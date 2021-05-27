@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thyemleaf.org"
+	th:replace="/seller-pages/userbase::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>User Profile</title>
+</head>
+<body>
+	<section>
+
+		<h3 class="text-center">My All Orders</h3>
+
+		<br>
+		<div th:if="${session.msg}" th:classappend="${session.type}"
+			class="alert" role="alert">
+			<p th:text="${session.msg}"></p>
+			<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm">
+					<div style="margin: 10px" class="table-responsive">
+						<table class="table table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">PID</th>
+									<!-- <th scope="col">Name</th> -->
+									<th scope="col">Actual Amount</th>
+								
+									<th scope="col">Current Amount</th>
+									<th scope="col">Status</th>
+									<th scope="col">Day's Left</th>
+									<!--<th scope="col">Action</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="l:${list}">
+									<td><a href="#"
+										th:href="@{'/productDetailsById/'+${l.id}}"
+										th:text="${'DASPIFS'+l.id}"></a></td>
+									<td th:text="${l.amount}"></td>
+									<!-- <th th:text="${l1.biddingAmount}"></th> -->
+									<td th:text="${l.bid_amount}"></td>
+									<td th:text="${l.status}"></td>
+									<td th:text="${l.totalLeftDays>=0}?${l.totalLeftDays}:'0'"></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-sm">
+					<div style="margin: 10px" class="table-responsive">
+						<table class="table table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Your Bid</th>
+									<th scope="col">Bid Time</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="l1:${amountList}">
+									<th th:text="${l1.biddingAmount}"></th>
+									<td th:text="${l1.bidTime}"></td>
+									
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
